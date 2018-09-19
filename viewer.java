@@ -1,14 +1,22 @@
+/*
+*
+* Author : Abhash Jain (ajain28) - CSC591 - HW1
+* viewer.java file for wather
+*
+*/
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.Watcher.Event.EventType;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
+import org.apache.zookeeper.ZooDefs.Ids;
 
 class PlayerInfo{
 	private String playerName;
@@ -81,18 +89,18 @@ public class viewer {
 			public void process(WatchedEvent event) {
 				String eventPath = event.getPath();
 				if (event.getState() == KeeperState.SyncConnected) {
-					System.out.println("CLient is sync!");
+					//System.out.println("CLient is sync!");
 					connSignal.countDown();
 				} else if(event.getType()==EventType.NodeChildrenChanged){
-					System.out.println("Node value is updated");
+					//System.out.println("Node value is updated");
 				}
 				if(event.getType() == Event.EventType.None) {
 					if(event.getState() == KeeperState.Disconnected) {
-						System.out.println("Node is disconnected!");
+						//System.out.println("Node is disconnected!");
 					}
 				}
 				//if(eventPath!=null) {
-					System.out.println("Watcher has received the event "+eventPath);
+					//System.out.println("Watcher has received the event "+eventPath);
 					try {
 						List<String> childs = zk.getChildren(SCORE_PATH, false);
 						newList.clear();
@@ -160,6 +168,7 @@ public class viewer {
 		connSignal.await();
 		return zk;
 	}
+
 	public static void main(String[] args) {
 		if(args.length==2) {
 			String temp = args[0];
@@ -178,6 +187,15 @@ public class viewer {
 				if(zk==null) {
 					System.out.println("Error:Connection failed to zookeeper!");
 					System.exit(0);
+				}
+				if(zk.exists(BASE_PATH, false)==null) {
+					zk.create(BASE_PATH, "Base Node".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+				}
+				if(zk.exists(ONLINE_PATH, false)==null) {
+					zk.create(ONLINE_PATH, "IS ONLINE PARENT".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+				}
+				if(zk.exists(SCORE_PATH, false)==null) {
+					zk.create(SCORE_PATH, "SCORES".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 				}
 				while(true) {
 					List<String> chd = zk.getChildren(SCORE_PATH, true);

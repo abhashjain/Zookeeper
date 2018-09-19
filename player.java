@@ -1,3 +1,9 @@
+/*
+*
+* Author : Abhash Jain (ajain28) - CSC591 - HW1
+* player.java file for player
+*
+*/
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
@@ -70,7 +76,7 @@ public class player {
 	public static ZooKeeper init(player p1,String host) throws Exception{
 		ZooKeeper zk = p1.connect(host);
 		if(zk.exists(BASE_PATH, false)==null) {
-			p1.persis_createNode(host, "Base Node".getBytes());
+			p1.persis_createNode(BASE_PATH, "Base Node".getBytes());
 		}
 		if(zk.exists(SCORE_PATH, false)==null) {
 			p1.persis_createNode(SCORE_PATH, "SCORES".getBytes());
@@ -170,6 +176,7 @@ public class player {
 					Thread.sleep(((int)delay*1000));
 					count--;
 				}
+				zk.close();
 			} catch (Exception e) {
 				System.out.println("Distribution: Catch Block!");
 				e.printStackTrace();

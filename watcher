@@ -1,4 +1,10 @@
 #!/bin/bash
+#############################
+#
+# Author : Abhash Jain (ajain28)
+# CSC591 : HW1 watcher exection file
+#
+#############################
 if [ $# -eq 2 ]
 then
 	java -cp ".:./jarfile/slf4j-api-1.7.25.jar:./jarfile/slf4j-simple-1.7.25.jar:./jarfile/zookeeper-3.4.12.jar" viewer $@
