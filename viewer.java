@@ -91,7 +91,7 @@ public class viewer {
 						System.out.println("Node is disconnected!");
 					}
 				}
-				if(eventPath!=null) {
+				//if(eventPath!=null) {
 					System.out.println("Watcher has received the event "+eventPath);
 					try {
 						List<String> childs = zk.getChildren(SCORE_PATH, false);
@@ -154,7 +154,7 @@ public class viewer {
 						System.out.println(p.getPlayerName() + "\t" + p.getScore() + online);			
 					}
 					
-				}
+				//}
 			}
 		});
 		connSignal.await();
@@ -181,6 +181,7 @@ public class viewer {
 				}
 				while(true) {
 					List<String> chd = zk.getChildren(SCORE_PATH, true);
+					List<String> chd1 = zk.getChildren(ONLINE_PATH, true);
 				}
 			} catch (Exception e) {
 				System.out.println("Error: Something went wrong in watcher!");

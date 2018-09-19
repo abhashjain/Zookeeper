@@ -29,10 +29,10 @@ public class player {
 		zk = new ZooKeeper(host, 3000, new Watcher() {
 			public void process(WatchedEvent event) {
 				if (event.getState() == KeeperState.SyncConnected) {
-					System.out.println("CLient is sync!");
+					//System.out.println("CLient is sync!");
 					connSignal.countDown();
 				} else if(event.getType()==EventType.NodeChildrenChanged){
-					System.out.println("Node value is updated");
+					//System.out.println("Node value is updated");
 				}
 			}
 		});
@@ -95,7 +95,7 @@ public class player {
 			}
 			IP = t[0];
 			playerName = args[1];
-			System.out.println("Player Name " + playerName + " IP "+ IP + " Port "+port);
+			//System.out.println("Player Name " + playerName + " IP "+ IP + " Port "+port);
 			String connectionString = IP + ":" + port;
 			player player = new player();
 			try {
@@ -112,15 +112,28 @@ public class player {
 					System.exit(0);
 				}
 				Scanner in = new Scanner(System.in);
-				int score = in.nextInt();
+				System.out.println("Enter a score or 'n' to exit!");
+				String input = in.next();
+				if(input.equals("n") || input.equals("N")) {
+					zk.close();
+					System.exit(0);
+				}
+				int score =Integer.parseInt(input);
+				//int score = in.nextInt();
 				while(true) {
 					//create a sequential node in format ONLINE_PATH:SCORE:seq_number
 					player.seq_createNode(SCORE_PATH +"/" + playerName + ":" +score +":", "Scores".getBytes());
-					score = in.nextInt();
+					System.out.println("Enter a score or 'n' to exit!");
+					input = in.next();
+					if(input.equals("n") || input.equals("N")) {
+						zk.close();
+						System.exit(0);
+					}
+					score =Integer.parseInt(input);
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
-				System.out.println("Catch Block!");
+				System.out.println("Error: Player Catch Block!");
 				e.printStackTrace();
 			}
 		} else if(args.length ==5){ //Normal Distribution case
@@ -137,7 +150,7 @@ public class player {
 			float delay = Float.parseFloat(args[3]);
 			int meanScore = Integer.parseInt(args[4]);
 			String connectionString = IP + ":" + port;
-			System.out.println("Player Name " + playerName + " IP "+ IP + " Port "+port + " count " +count + " Mean Score "+meanScore + " delay " + delay);
+			//System.out.println("Player Name " + playerName + " IP "+ IP + " Port "+port + " count " +count + " Mean Score "+meanScore + " delay " + delay);
 			player player = new player();
 			try {
 				ZooKeeper zk = init(player,connectionString);
