@@ -36,7 +36,7 @@ Steps to run the code :
 
 	$  watcher 152.46.18.226 20
 
-8. If you want to run player on the new console then you have execute bootstrap program first to set the path.
+8. If you want to run player on the new console then you have execute bootstrap program first to set the path. if you stay on the same console then there is no need to run bootstrap program. To run the bootstrap you have to Navigate to project directory on the new console.
 
 	format for player : player IP:[port] <player name> [count] [u_delay in seconds] [score]
 
@@ -49,4 +49,4 @@ Steps to run the code :
 	
 	$player 152.46.18.226:6000 Abhash 10 5 100
 
- 
+ NOTE: All the exection needs to be run from the Project  directory which in this case is CSC591-HW1.
