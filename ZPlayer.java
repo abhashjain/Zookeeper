@@ -1,7 +1,7 @@
 /*
 *
 * Author : Abhash Jain (ajain28) - CSC591 - HW1
-* player.java file for player
+* Player.java file for Player
 *
 */
 import java.util.Random;
@@ -19,7 +19,7 @@ import org.apache.zookeeper.ZooKeeper;
 
 
 
-public class player {
+public class ZPlayer {
 	public static final String BASE_PATH = "/ajain28";
 	public static final String SCORE_PATH = BASE_PATH + "/scores";
 	public static final String ONLINE_PATH = BASE_PATH + "/online";
@@ -73,7 +73,7 @@ public class player {
 	{
 		zk.delete(path,  zk.exists(path, true).getVersion());
 	}
-	public static ZooKeeper init(player p1,String host) throws Exception{
+	public static ZooKeeper init(ZPlayer p1,String host) throws Exception{
 		ZooKeeper zk = p1.connect(host);
 		if(zk.exists(BASE_PATH, false)==null) {
 			p1.persis_createNode(BASE_PATH, "Base Node".getBytes());
@@ -103,7 +103,7 @@ public class player {
 			playerName = args[1];
 			//System.out.println("Player Name " + playerName + " IP "+ IP + " Port "+port);
 			String connectionString = IP + ":" + port;
-			player player = new player();
+			ZPlayer player = new ZPlayer();
 			try {
 				ZooKeeper zk = init(player,connectionString);
 				if(zk==null) {
@@ -118,17 +118,10 @@ public class player {
 					System.exit(0);
 				}
 				Scanner in = new Scanner(System.in);
-				System.out.println("Enter a score or 'n' to exit!");
-				String input = in.next();
-				if(input.equals("n") || input.equals("N")) {
-					zk.close();
-					System.exit(0);
-				}
-				int score =Integer.parseInt(input);
+				String input;
+				int score;
 				//int score = in.nextInt();
 				while(true) {
-					//create a sequential node in format ONLINE_PATH:SCORE:seq_number
-					player.seq_createNode(SCORE_PATH +"/" + playerName + ":" +score +":", "Scores".getBytes());
 					System.out.println("Enter a score or 'n' to exit!");
 					input = in.next();
 					if(input.equals("n") || input.equals("N")) {
@@ -136,6 +129,11 @@ public class player {
 						System.exit(0);
 					}
 					score =Integer.parseInt(input);
+					if(score<0) {
+						continue;
+					}
+					//create a sequential node in format ONLINE_PATH:SCORE:seq_number
+					player.seq_createNode(SCORE_PATH +"/" + playerName + ":" +score +":", "Scores".getBytes());
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -157,7 +155,7 @@ public class player {
 			int meanScore = Integer.parseInt(args[4]);
 			String connectionString = IP + ":" + port;
 			//System.out.println("Player Name " + playerName + " IP "+ IP + " Port "+port + " count " +count + " Mean Score "+meanScore + " delay " + delay);
-			player player = new player();
+			ZPlayer player = new ZPlayer();
 			try {
 				ZooKeeper zk = init(player,connectionString);
 				if(zk==null) {

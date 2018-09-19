@@ -1,16 +1,16 @@
 #!/bin/bash
-#####################
+#############################
 #
 # Author : Abhash Jain (ajain28)
-# CSC591 HW1 :  FILE for player execution
+# CSC591 : HW1 player exection file
 #
-#####################
+#############################
 if [ $# -eq 2 ]
 then
-	java -cp ".:./jarfile/slf4j-api-1.7.25.jar:./jarfile/slf4j-simple-1.7.25.jar:./jarfile/zookeeper-3.4.12.jar" player $@
+	java -cp ".:./jarfile/slf4j-api-1.7.25.jar:./jarfile/slf4j-simple-1.7.25.jar:./jarfile/zookeeper-3.4.12.jar" ZPlayer $@
 elif [ $# -eq 5 ]
 then
-	java -cp ".:./jarfile/slf4j-api-1.7.25.jar:./jarfile/slf4j-simple-1.7.25.jar:./jarfile/zookeeper-3.4.12.jar" player $@
+	java -cp ".:./jarfile/slf4j-api-1.7.25.jar:./jarfile/slf4j-simple-1.7.25.jar:./jarfile/zookeeper-3.4.12.jar" ZPlayer $@
 else
 	echo "Usage: player <IP[:port] <player_name> [<count>] [<delay>] [<score>]>"
 fi

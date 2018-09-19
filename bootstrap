@@ -1,0 +1,2 @@
+#!/bin/bash
+export PATH=$PWD/$(dirname -- "$0"):$PATH
