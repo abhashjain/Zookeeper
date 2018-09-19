@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo apt-get install openjdk-8-jdk-headless
 touch a.class
 rm -rf *.class
 export PATH=$PATH:$PWD/$(dirname "$0")
