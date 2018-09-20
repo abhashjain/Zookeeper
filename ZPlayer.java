@@ -46,8 +46,12 @@ public class ZPlayer {
 		return zk;
 	}
 	
-	public void close() throws InterruptedException {
-		zk.close();
+	public void close() {
+		try{
+			zk.close();
+		} catch (Exception e){
+			System.out.println("Connection closed!");
+		}
 	}
 
 	public void persis_createNode(String path, byte[] data) throws Exception
@@ -110,6 +114,11 @@ public class ZPlayer {
 					System.out.println("Error: Zookeeper is not connected!");
 					System.exit(0);
 				}
+				Runtime.getRuntime().addShutdownHook(new Thread() {
+    					public void run() { 
+						player.close();
+    					 }
+ 				});
 				//check the online node and create the node 
 				if(zk.exists(ONLINE_PATH + "/" + playerName, false)==null) {
 					player.ep_createNode(ONLINE_PATH + "/"+playerName, "Player online".getBytes());
@@ -160,12 +169,19 @@ public class ZPlayer {
 			String connectionString = IP + ":" + port;
 			//System.out.println("Player Name " + playerName + " IP "+ IP + " Port "+port + " count " +count + " Mean Score "+meanScore + " delay " + delay);
 			ZPlayer player = new ZPlayer();
+
 			try {
 				ZooKeeper zk = init(player,connectionString);
 				if(zk==null) {
 					System.out.println("Error: Zookeeper is not connected!");
 					System.exit(0);
 				}
+				Runtime.getRuntime().addShutdownHook(new Thread() {
+    					public void run() { 
+						player.close();
+    				 	}
+				});
+
 				if(zk.exists(ONLINE_PATH + "/" + playerName, false)==null) {
 					player.ep_createNode(ONLINE_PATH + "/"+playerName, "Player online".getBytes());
 				} else {
