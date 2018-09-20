@@ -24,10 +24,17 @@ Steps to run the code :
 
 	$ . bootstrap
 
-5. To build the class file, use build.sh. It will try to install jdk version. If prompted enter your credential to install the package.
+5. To build the class file, use build.sh. It will try to install jdk version. If prompted enter your credential to install the package. or you can use make to build the project.
 
 	$ . build.sh
+		
+		or
+	$ make
 
+NOTE: As there is path needs to be set then to run the executable generated here on the new terminal either on the new terminal run the make again or if you don't prefer to build the project again then use bootstrap to setup.
+
+	$ . bootstrap
+	
 6. As mentioned in the HW, by default if no port number is mentioned it will listen on 6000 port. If you are not running zookeeper on 6000 then please provide appropriate port number.
 
 7. To run the watcher, you can use watcher to launch with appropriate parameter.
@@ -50,3 +57,5 @@ Steps to run the code :
 	$player 152.46.18.226:6000 Abhash 10 5 100
 
  NOTE: All the exection needs to be run from the Project  directory which in this case is CSC591-HW1.
+
+Note: All '$' written here means your prompt.
