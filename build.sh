@@ -4,7 +4,7 @@
 # CSC591 - HW1 BUILD FILE
 # 
 ####################
-sudo apt-get install openjdk-8-jdk-headless
+sudo apt-get install -y openjdk-8-jdk-headless 
 touch a.class
 rm -rf *.class
 export PATH=$PWD/$(dirname -- "$0"):$PATH
