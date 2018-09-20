@@ -120,16 +120,6 @@ public class ZPlayer {
 				Scanner in = new Scanner(System.in);
 				String input;
 				int score;
-				Runtime.getRuntime().addShutdownHook(new Thread() {
-				    public void run() {
-					try{
-						zk.close();
-					} catch(Exception e){
-						System.out.println("Error: Connection close failure!");
-					}
-					System.exit(0);	
-    				 }
- 				});
 				//int score = in.nextInt();
 				while(true) {
 					System.out.println("Enter a score or 'n' to exit!");
@@ -172,16 +162,6 @@ public class ZPlayer {
 			ZPlayer player = new ZPlayer();
 			try {
 				ZooKeeper zk = init(player,connectionString);
-				Runtime.getRuntime().addShutdownHook(new Thread() {
-				    public void run() {
-					try{
-						zk.close();
-					} catch(Exception e){
-						System.out.println("Error: Connection close failure!");
-					}
-					System.exit(0);	
-    				 }
- 				});
 				if(zk==null) {
 					System.out.println("Error: Zookeeper is not connected!");
 					System.exit(0);
