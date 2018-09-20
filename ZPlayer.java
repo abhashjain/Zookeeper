@@ -174,6 +174,9 @@ public class ZPlayer {
 				}
 				while(count>0) {
 					int score = ((int)new Random().nextGaussian()*DEVIATION) + meanScore;
+					if(score<=0){
+						continue;
+					}
 					player.seq_createNode(SCORE_PATH +"/" + playerName + ":" +score +":", "Scores".getBytes());
 					Thread.sleep(((int)delay*1000));
 					count--;
