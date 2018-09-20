@@ -149,17 +149,19 @@ public class viewer {
 							}
 						}
 					}
-					System.out.println("Most recent scores");
+					System.out.println("\nMost recent scores");
 					System.out.println("------------------");
 					for(PlayerInfo p :recentScores){
 						String online = p.isOnline() ? " **" : "";
-						System.out.println(p.getPlayerName() + "\t" + p.getScore() +online);
+						//System.out.println(p.getPlayerName() + "\t\t\t" + p.getScore() +online);
+						System.out.printf("%-25s %d %s\n", p.getPlayerName(),p.getScore(),online);
 					}
-					System.out.println("Highest scores");
+					System.out.println("\nHighest scores");
 					System.out.println("--------------");
 					for(PlayerInfo p : highestScores){
 						String online  = p.isOnline() ? " **":"";
-						System.out.println(p.getPlayerName() + "\t" + p.getScore() + online);			
+						//System.out.println(p.getPlayerName() + "\t\t\t" + p.getScore() + online);			
+						System.out.printf("%-25s %d %s\n", p.getPlayerName(),p.getScore(),online);
 					}
 					
 				//}
