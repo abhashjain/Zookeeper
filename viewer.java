@@ -111,7 +111,7 @@ public class viewer {
 						}
 					} catch(Exception e) {
 						System.out.println("Catched in process!");
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 					recentScores.clear();
 					highestScores.clear();
@@ -133,7 +133,7 @@ public class viewer {
 						onlineNodes = zk.getChildren(ONLINE_PATH, false);
 					} catch(Exception e) {
 						System.out.println("Error: Online Node children fails !");
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 					for(String s:onlineNodes) {
 						for(PlayerInfo p:recentScores) {
@@ -180,6 +180,9 @@ public class viewer {
 				port = 6000;
 			}
 			N = Integer.parseInt(args[1]);
+			if(N>25){
+				N=25;
+			}
 			String connectionString = IP +":"+port;
 			viewer view = new viewer();
 			try {
@@ -203,7 +206,7 @@ public class viewer {
 				}
 			} catch (Exception e) {
 				System.out.println("Error: Something went wrong in watcher!");
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}else {
 			System.out.println("Usage: <exe name> <IP[:port]> N");

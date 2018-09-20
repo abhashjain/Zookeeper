@@ -138,7 +138,7 @@ public class ZPlayer {
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("Error: Player Catch Block!");
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		} else if(args.length ==5){ //Normal Distribution case
 			String temp = args[0];
@@ -153,6 +153,10 @@ public class ZPlayer {
 			int count = Integer.parseInt(args[2]);
 			float delay = Float.parseFloat(args[3]);
 			int meanScore = Integer.parseInt(args[4]);
+			if(meanScore <= 0 || delay <= 0 || count <= 0 || port <=0){
+				System.out.println("Error: Enter positive number and try again!");
+                                System.exit(0);
+			}
 			String connectionString = IP + ":" + port;
 			//System.out.println("Player Name " + playerName + " IP "+ IP + " Port "+port + " count " +count + " Mean Score "+meanScore + " delay " + delay);
 			ZPlayer player = new ZPlayer();
@@ -177,7 +181,7 @@ public class ZPlayer {
 				zk.close();
 			} catch (Exception e) {
 				System.out.println("Distribution: Catch Block!");
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 	} //End of main fn
