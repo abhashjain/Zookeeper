@@ -31,7 +31,7 @@ Steps to run the code :
 		or
 	$ make
 
-NOTE: As there is path needs to be set then to run the executable generated here on the new terminal either on the new terminal run the make again or if you don't prefer to build the project again then use bootstrap to setup.
+NOTE: As there is path needs to be set then to run the executable generated here on the new terminal either on the new terminal run bootstrap to setup.
 
 	$ . bootstrap
 	
